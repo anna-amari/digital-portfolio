@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Pet Patrol",
+    "description": "Full-featured pet adoption web app",
+    "link": "#",
+    "image": "/images/project1.png"
+  },
+  {
+    "id": 2,
+    "title": "CyberControl",
+    "description": "Cybersecurity education platform",
+    "link": "#",
+    "image": "/images/project2.png"
+  }
+]

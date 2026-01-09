@@ -1,14 +1,16 @@
+/* 1. All imports MUST be at the top */
 @import "tailwindcss";
 
+/* 2. Combine into ONE @theme block */
 @theme {
-  /* Your Requested Palette Variables */
+  /* Colors */
   --color-blush: #F3C6D3;
   --color-cream: #FFF8F3;
   --color-black: #000000;
   --color-pink-light: #FFF5F7;
 }
 
-/* Optional: Custom scrollbar to match the pink theme */
+/* 3. Custom CSS goes at the bottom */
 ::-webkit-scrollbar {
   width: 8px;
 }

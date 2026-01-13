@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Sidebar from "@/components/SideBar";
 import Chatbot from "@/components/Chatbot";
+
 import { 
   Star, CheckCircle2, Layout, Video, PenTool, Code, 
   FileDown, GraduationCap, Briefcase, MessageSquare, ExternalLink, Github, X 
@@ -26,7 +27,7 @@ export default function Home() {
         setIsVisible(true);
       }
 
-      // Add background blur if we've scrolled more than 50px
+  
       setIsScrolled(currentScrollY > 50);
       
       setLastScrollY(currentScrollY);
@@ -61,7 +62,7 @@ export default function Home() {
     desc: "Adopters can apply for adoption and fill out the form for the foundation to verify.",
     tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
    image: "/projects/petpatrol/a1.png", 
-    github: "https://github.com/anna-amari/pet-patrol", // Update with your actual link
+    github: "https://github.com/anna-amari/pet-patrol", 
     screenshots: Array.from({ length: 19 }, (_, i) => `/projects/petpatrol/a${i + 1}.png`),
   },
   {
@@ -69,12 +70,60 @@ export default function Home() {
     desc: "It emphasizes awareness of cyber behavior and device protection.",
     tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
     image: "/projects/cybercontrol/b1.png",
-    github: "https://github.com/anna-amari/cyber-control",
-    // Generates b1.png to b7.png
+    github: "https://github.com/anna-amari/cybercontrol",
+   
     screenshots: Array.from({ length: 7 }, (_, i) => `/projects/cybercontrol/b${i + 1}.png`),
   }
  
 ];
+
+
+function LogoSection() {
+  const logos = [
+    { src: '/logo/1.png', title: 'StudLife' },
+    { src: '/logo/2.jpg', title: 'CyberControl' },
+    { src: '/logo/5.jpg', title: 'Majestic Bloom Aroma' },
+    { src: '/logo/3.jpg', title: 'Pet Patrol' },
+    { src: '/logo/4.jpg', title: 'eList Book' },
+
+  ];
+
+  return (
+    <section className="py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-12">Featured Logos</h2>
+        
+        <div className="flex flex-wrap justify-center gap-8 md:gap-12">
+          {logos.map((logo, index) => (
+            <div 
+              key={index} 
+              className="flex flex-col items-center group"
+            >
+              {/* Circle Image Container */}
+              <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-gray-200 group-hover:border-pink-500 transition-all duration-300 shadow-lg group-hover:shadow-xl">
+                <Image
+                  src={logo.src}
+                  alt={`${logo.title} logo`}
+                  fill
+                  sizes="(max-width: 768px) 128px, 160px"
+                  className="object-cover group-hover:scale-110 transition-transform duration-300"
+                  priority={index < 2} // Load first 2 images faster
+                />
+              </div>
+              
+              {/* Title */}
+              <div className="mt-4 text-center">
+                <h3 className="font-semibold text-lg text-gray-800 group-hover:text-blue-600 transition-colors">
+                  {logo.title}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
   const services = [
     { title: "Administrative Excellence", desc: "Expert Calendar & Email Management and meticulous Documentation Organization." },
@@ -82,47 +131,47 @@ export default function Home() {
     { title: "Client & Social Growth", desc: "Professional Client Communications and Social Media Support with consistent follow-ups." },
   ];
 
+
   const toolCategories = [
-    { 
-      name: "Productivity", 
-      icon: <Layout size={20} />, 
-      tools: [
-         { name: "MS Office 365", slug: "microsoft365" },
-        { name: "Notion", slug: "notion" }
-      ] 
-    },
-    { 
-      name: "Creative", 
-      icon: <PenTool size={20} />, 
-      tools: [
-        { name: "Canva", slug: "canva" },
-       { name: "CapCut", slug: "video" },
-        { name: "Figma", slug: "figma" }
-      ] 
-    },
-    { 
-      name: "Communication", 
-      icon: <Video size={20} />, 
-      tools: [
-        { name: "Zoom", slug: "zoom" },
-        { name: "Google Meet", slug: "googlemeet" },
-        { name: "Gmail", slug: "gmail" }
-      ] 
-    },
-    { 
-      name: "IT Stack", 
-      icon: <Code size={20} />, 
-      tools: [
-        { name: "HTML", slug: "html5" },
-        { name: "CSS", slug: "css3" }, 
-        { name: "JavaScript", slug: "javascript" },
-        { name: "Node.js", slug: "nodedotjs" },
-        { name: "Python", slug: "python" },
-        { name: "SQL", slug: "mysql" },
-        { name: "GitHub", slug: "github" }
-      ] 
-    }
-  ];
+  { 
+    name: "Productivity", 
+    icon: <Layout size={20} />, 
+    tools: [
+      { name: "MS Word", slug: "ms-word", icon: <img src="/icons/word.jpg" alt="Word" className="w-5 h-5" /> },
+      { name: "MS Excel", slug: "ms-excel", icon: <img src="/icons/excel.jpg" alt="Excel" className="w-5 h-5" /> },
+      { name: "MS Presentation", slug: "ms-presentation", icon: <img src="/icons/ppt.jpg" alt="PowerPoint" className="w-5 h-5" /> }, 
+      { name: "Notion", slug: "notion", icon: <img src="/icons/notion.jpg" alt="Notion" className="w-5 h-5" /> }
+    ] 
+  },
+  { 
+    name: "Creative", 
+    icon: <PenTool size={20} />, 
+    tools: [
+      { name: "Canva", slug: "canva", icon: <img src="/icons/canva.jpg" alt="Canva" className="w-5 h-5" /> },
+      { name: "Capcut", slug: "capcut", icon: <img src="/icons/capcut.jpg" alt="Capcut" className="w-5 h-5" /> }
+    ] 
+  },
+  { 
+    name: "Communication", 
+    icon: <Video size={20} />, 
+    tools: [
+      { name: "Zoom", slug: "zoom", icon: <img src="/icons/zoom.jpg" alt="Zoom" className="w-5 h-5" /> },
+      { name: "Google Meet", slug: "googlemeet", icon: <img src="/icons/gmeet.jpg" alt="Google Meet" className="w-5 h-5" /> },
+      { name: "Gmail", slug: "gmail", icon: <img src="/icons/gmail.jpg" alt="Gmail" className="w-5 h-5" /> }
+    ] 
+  },
+  { 
+    name: "IT Stack", 
+    icon: <Code size={20} />, 
+    tools: [
+      { name: "HTML", slug: "html5", icon: <img src="/icons/html.jpg" alt="HTML5" className="w-5 h-5" /> },
+      { name: "CSS3", slug: "css3", icon: <img src="/icons/css3.jpg" alt="CSS3" className="w-5 h-5" /> },
+      { name: "Next.js", slug: "nextdotjs", icon: <img src="/icons/nextjs.jpg" className="w-5 h-5" /> },
+      { name: "SQL", slug: "mysql", icon: <img src="/icons/sql.jpg" alt="SQL" className="w-5 h-5" /> },
+      { name: "GitHub", slug: "github", icon: <img src="/icons/github.jpg" alt="GitHub" className="w-5 h-5" /> }
+    ] 
+  }
+];
 
   return (
     <main className="selection:bg-blush min-h-screen">
@@ -176,40 +225,95 @@ export default function Home() {
     </div>
   </div>
 </motion.nav>
-
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center min-h-screen text-center px-6">
-        <motion.p 
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          className="text-sm tracking-[0.4em] uppercase mb-4 text-gray-500 font-bold"
+{/* Hero Section - Text Dead Center, Image on the Right */}
+<section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden bg-blush/10">
+  
+  {/* 1. Centered Text Content (z-10 ensures it stays on top) */}
+  <div className="relative z-10 w-full max-w-4xl flex flex-col items-center text-center space-y-6">
+    <motion.p 
+      initial={{ opacity: 0, y: 10 }} 
+      animate={{ opacity: 1, y: 0 }}
+      className="text-sm tracking-[0.4em] uppercase text-gray-500 font-bold"
+    >
+      Hi, I'm
+    </motion.p>
+    
+    <h1 className="text-7xl md:text-8xl xl:text-9xl font-black uppercase tracking-tighter leading-none text-black">
+      AMARI
+    </h1>
+    
+    <div className="h-16 md:h-20 flex items-center justify-center">
+      <AnimatePresence mode="wait">
+        <motion.h2
+          key={titles[titleIndex]}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -20, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl md:text-4xl font-light tracking-[0.2em] text-gray-400 uppercase"
         >
-          Welcome to my Portfolio
-        </motion.p>
-        
-        <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4">AMARI</h1>
-        
-        <div className="h-20">
-          <AnimatePresence mode="wait">
-            <motion.h2
-              key={titles[titleIndex]}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl md:text-4xl font-light tracking-[0.2em] text-black"
-            >
-              {titles[titleIndex]}
-            </motion.h2>
-          </AnimatePresence>
-        </div>
+          {titles[titleIndex]}
+        </motion.h2>
+      </AnimatePresence>
+    </div>
 
-        <a 
-          href="/Resume.docx" download
-          className="mt-12 flex items-center gap-3 bg-black text-cream px-10 py-4 rounded-full hover:bg-blush hover:text-black transition-all font-bold tracking-widest text-xs"
-        >
-          <FileDown size={18} /> DOWNLOAD CV
-        </a>
-      </section>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+    >
+      <a 
+        href="/Resume.docx" 
+        download
+        className="mt-8 flex items-center gap-3 bg-black text-white px-12 py-5 rounded-full hover:bg-blush hover:text-black transition-all font-bold tracking-widest text-xs shadow-xl"
+      >
+        <FileDown size={18} /> DOWNLOAD CV
+      </a>
+    </motion.div>
+  </div>
+
+  {/* 2. Right-Aligned Image (Visible only on Large screens to avoid overlapping text on mobile) */}
+  <div className="absolute right-0 lg:right-10 xl:right-20 top-1/2 -translate-y-1/2 hidden lg:block opacity-80 xl:opacity-100">
+    <motion.div 
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="relative w-56 h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72"
+    >
+      {/* Decorative Blur behind image */}
+      <div className="absolute inset-0 bg-blush/20 blur-[100px] rounded-full -z-10"></div>
+
+      <div className="
+        relative
+        w-full 
+        h-full 
+        rounded-full 
+        overflow-hidden 
+        border-[12px] 
+        border-white 
+        shadow-[0_20px_50px_rgba(0,0,0,0.1)]
+      ">
+        <Image
+          src="/anna.jpg"
+          alt="Portrait of Amari"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+      
+      {/* Small floating accents */}
+      <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-blush/30 rounded-full blur-2xl"></div>
+    </motion.div>
+  </div>
+
+  {/* Mobile Image (Visible only on mobile/tablet, centered below text) */}
+  <div className="lg:hidden mt-12">
+      {/* If you want the image on mobile, it would go here, 
+          otherwise the section remains clean with just centered text on phone */}
+  </div>
+
+</section>
 
       {/* About & Education */}
       <section id="about" className="py-24 px-6 max-w-6xl mx-auto">
@@ -244,7 +348,7 @@ export default function Home() {
               A results-driven professional balancing the organizational precision of a 
               <strong> Virtual Assistant</strong> with the technical logic of an 
               <strong> IT Student</strong>. My background in Business Management (ABM) 
-              provides me with a unique edge in understanding client ROI while 
+              provides me with a unique edge in understanding the cleint while 
               implementing tech-focused solutions.
             </p>
             <div className="grid grid-cols-2 gap-4">
@@ -281,18 +385,25 @@ export default function Home() {
             {cat.name}
           </h4>
           
-          {/* Visual Grid of Icons */}
-          <div className="grid grid-cols-2 gap-4">
+        {/* Visual Grid of Icons */}
+<div className="grid grid-cols-2 gap-4">
   {cat.tools.map((t, j) => (
     <div key={j} className="flex flex-col items-center gap-2 group">
       <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center border border-black/5 group-hover:border-blush group-hover:shadow-lg group-hover:shadow-blush/20 transition-all">
-        <img 
-          /* Option A: Use /000000 for black icons */
-          /* Option B: Remove /ffffff to see the real Brand Colors (Recommended) */
-          src={`https://cdn.simpleicons.org/${t.slug}`} 
-          alt={t.name}
-          className="w-6 h-6 transition-transform duration-300 group-hover:scale-110"
-        />
+        
+        {/* THE FIX: Check if we have a local icon first */}
+        {t.icon ? (
+          /* This renders your <img> from the toolCategories array */
+          t.icon
+        ) : (
+          /* This renders the SimpleIcons only if no local icon is provided */
+          <img 
+            src={`https://cdn.simpleicons.org/${t.slug}`} 
+            alt={t.name}
+            className="w-6 h-6 transition-transform duration-300 group-hover:scale-110 object-contain"
+          />
+        )}
+
       </div>
       <span className="text-[9px] font-bold uppercase tracking-tight text-center opacity-60 group-hover:opacity-100 transition-opacity">
         {t.name}
@@ -305,6 +416,8 @@ export default function Home() {
     </div>
   </div>
 </section>
+
+     
 
       {/* Services Section */}
       <section id="services" className="py-24 px-6 max-w-7xl mx-auto grid lg:grid-cols-3 gap-12">
@@ -322,7 +435,7 @@ export default function Home() {
         <div className="bg-black text-cream p-10 rounded-[40px] h-fit sticky top-24">
           <h4 className="text-xl font-black mb-8 flex items-center gap-3"><Star className="text-blush" fill="#F3C6D3"/> Competencies</h4>
           <ul className="space-y-6">
-            {["Adaptability", "Time Management", "Technical Troubleshooting", "Client Relations"].map((skill, i) => (
+            {["Adaptability", "Time Management", "Flexibility", "Client Relations"].map((skill, i) => (
               <li key={i} className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest border-b border-white/10 pb-4 last:border-0">
                 <CheckCircle2 size={16} className="text-blush" /> {skill}
               </li>
@@ -420,6 +533,8 @@ export default function Home() {
     )}
   </AnimatePresence>
 </section>
+
+ <LogoSection />
 
       {/* Contact Section */}
       <section id="contact" className="py-24 px-6 max-w-4xl mx-auto">

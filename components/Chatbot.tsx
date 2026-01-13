@@ -51,7 +51,7 @@ export default function ChatBot() {
     }
 
     if (q.includes("hello") || q.includes("hi")) {
-      return "Hi there! I'm Amari's AI. Want to hear about her 'StudLife' project or her 'IT Skills'?";
+      return "Hi there! I'm Amari's Assistant. Want to hear about her 'StudLife' project or her 'IT Skills'?";
     }
     
     return "I'm still learning! 🧠 Try asking about 'StudLife', 'Pet Patrol', or her 'Tech Stack'.";

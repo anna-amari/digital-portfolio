@@ -1,7 +1,6 @@
-/* 1. All imports MUST be at the top */
 @import "tailwindcss";
 
-/* 2. Combine into ONE @theme block */
+
 @theme {
   /* Colors */
   --color-blush: #F3C6D3;

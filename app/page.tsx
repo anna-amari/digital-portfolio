@@ -7,76 +7,10 @@ import Chatbot from "@/components/Chatbot";
 
 import { 
   Star, CheckCircle2, Layout, Video, PenTool, Code, 
-  FileDown, GraduationCap, Briefcase, MessageSquare, ExternalLink, Github, X 
+  FileDown, GraduationCap, Briefcase, ExternalLink, Github, X 
 } from "lucide-react";
 
-export default function Home() {
- const [activeGallery, setActiveGallery] = useState(null);
-   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const controlNavbar = () => {
-      const currentScrollY = window.scrollY;
-
-
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-
-  
-      setIsScrolled(currentScrollY > 50);
-      
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", controlNavbar);
-    return () => window.removeEventListener("scroll", controlNavbar);
-  }, [lastScrollY]);
-
-  const [titleIndex, setTitleIndex] = useState(0);
-  const titles = ["VIRTUAL ASSISTANT", "BSIT STUDENT", "TECH ENTHUSIAST"];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTitleIndex((prev) => (prev + 1) % titles.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
-
- const projects = [
-   {
-    title: "StudLife: IT Academic System",
-    desc: "It consists of Pomodoro Timer, To-Do List, Calendar, and Career Path descriptions.",
-    framework: "CodeIgniter 4",
-    tech: ["CodeIgniter", "Vanilla", "PHP", "SQL"],
-    image: "/projects/studlife/d1.png",
-    github: "https://github.com/anna-amari/studlife",
-    screenshots: Array.from({ length: 41 }, (_, i) => `/projects/studlife/d${i + 1}.png`),
-  },
-  {
-    title: "Pet Patrol System",
-    desc: "Adopters can apply for adoption and fill out the form for the foundation to verify.",
-    tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
-   image: "/projects/petpatrol/a1.png", 
-    github: "https://github.com/anna-amari/pet-patrol", 
-    screenshots: Array.from({ length: 19 }, (_, i) => `/projects/petpatrol/a${i + 1}.png`),
-  },
-  {
-    title: "CyberControl",
-    desc: "It emphasizes awareness of cyber behavior and device protection.",
-    tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
-    image: "/projects/cybercontrol/b1.png",
-    github: "https://github.com/anna-amari/cybercontrol",
-   
-    screenshots: Array.from({ length: 7 }, (_, i) => `/projects/cybercontrol/b${i + 1}.png`),
-  }
- 
-];
-
+const TITLES = ["VIRTUAL ASSISTANT", "BSIT STUDENT", "TECH ENTHUSIAST"];
 
 function LogoSection() {
   const logos = [
@@ -125,50 +59,117 @@ function LogoSection() {
   );
 }
 
-  const services = [
+export default function Home() {
+ const [activeGallery, setActiveGallery] = useState<typeof projects[0] | null>(null);
+   const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
+  
+      setIsScrolled(currentScrollY > 50);
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", controlNavbar);
+    return () => window.removeEventListener("scroll", controlNavbar);
+  }, [lastScrollY]);
+
+  const [titleIndex, setTitleIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTitleIndex((prev) => (prev + 1) % TITLES.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+ const projects = [
+  {
+    title: "Pet Patrol System",
+    desc: "Adopters can apply for adoption and fill out the form for the foundation to verify.",
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
+   image: "/projects/petpatrol/a1.png", 
+    github: "https://github.com/anna-amari/pet-patrol", 
+    screenshots: Array.from({ length: 19 }, (_, i) => `/projects/petpatrol/a${i + 1}.png`),
+  },
+  {
+    title: "StudLife: IT Academic System",
+    desc: "It consists of Pomodoro Timer, To-Do List, Calendar, and Career Path descriptions.",
+    framework: "CodeIgniter 4",
+    tech: ["CodeIgniter", "Vanilla", "PHP", "SQL"],
+    image: "/projects/studlife/d1.png",
+    github: "https://github.com/anna-amari/studlife",
+    screenshots: Array.from({ length: 41 }, (_, i) => `/projects/studlife/d${i + 1}.png`),
+  },
+  {
+    title: "CyberControl",
+    desc: "It emphasizes awareness of cyber behavior and device protection.",
+    tech: ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
+    image: "/projects/cybercontrol/b1.png",
+    github: "https://github.com/anna-amari/cybercontrol",
+   
+    screenshots: Array.from({ length: 7 }, (_, i) => `/projects/cybercontrol/b${i + 1}.png`),
+  }
+ 
+];
+
+
+const services = [
     { title: "Administrative Excellence", desc: "Expert Calendar & Email Management and meticulous Documentation Organization." },
     { title: "Data & Tech Support", desc: "Accurate Data Entry and IT-aligned support for digital workspace efficiency." },
     { title: "Client & Social Growth", desc: "Professional Client Communications and Social Media Support with consistent follow-ups." },
   ];
 
 
-  const toolCategories = [
+const toolCategories = [
   { 
     name: "Productivity", 
     icon: <Layout size={20} />, 
     tools: [
-      { name: "MS Word", slug: "ms-word", icon: <img src="/icons/word.jpg" alt="Word" className="w-5 h-5" /> },
-      { name: "MS Excel", slug: "ms-excel", icon: <img src="/icons/excel.jpg" alt="Excel" className="w-5 h-5" /> },
-      { name: "MS Presentation", slug: "ms-presentation", icon: <img src="/icons/ppt.jpg" alt="PowerPoint" className="w-5 h-5" /> }, 
-      { name: "Notion", slug: "notion", icon: <img src="/icons/notion.jpg" alt="Notion" className="w-5 h-5" /> }
+      { name: "MS Word", slug: "ms-word", icon: <Image src="/icons/word.jpg" alt="Word" width={20} height={20} className="w-5 h-5" /> },
+      { name: "MS Excel", slug: "ms-excel", icon: <Image src="/icons/excel.jpg" alt="Excel" width={20} height={20} className="w-5 h-5" /> },
+      { name: "MS Presentation", slug: "ms-presentation", icon: <Image src="/icons/ppt.jpg" alt="PowerPoint" width={20} height={20} className="w-5 h-5" /> }, 
+      { name: "Notion", slug: "notion", icon: <Image src="/icons/notion.jpg" alt="Notion" width={20} height={20} className="w-5 h-5" /> }
     ] 
   },
   { 
     name: "Creative", 
     icon: <PenTool size={20} />, 
     tools: [
-      { name: "Canva", slug: "canva", icon: <img src="/icons/canva.jpg" alt="Canva" className="w-5 h-5" /> },
-      { name: "Capcut", slug: "capcut", icon: <img src="/icons/capcut.jpg" alt="Capcut" className="w-5 h-5" /> }
+      { name: "Canva", slug: "canva", icon: <Image src="/icons/canva.jpg" alt="Canva" width={20} height={20} className="w-5 h-5" /> },
+      { name: "Capcut", slug: "capcut", icon: <Image src="/icons/capcut.jpg" alt="Capcut" width={20} height={20} className="w-5 h-5" /> }
     ] 
   },
   { 
     name: "Communication", 
     icon: <Video size={20} />, 
     tools: [
-      { name: "Zoom", slug: "zoom", icon: <img src="/icons/zoom.jpg" alt="Zoom" className="w-5 h-5" /> },
-      { name: "Google Meet", slug: "googlemeet", icon: <img src="/icons/gmeet.jpg" alt="Google Meet" className="w-5 h-5" /> },
-      { name: "Gmail", slug: "gmail", icon: <img src="/icons/gmail.jpg" alt="Gmail" className="w-5 h-5" /> }
+      { name: "Zoom", slug: "zoom", icon: <Image src="/icons/zoom.jpg" alt="Zoom" width={20} height={20} className="w-5 h-5" /> },
+      { name: "Google Meet", slug: "googlemeet", icon: <Image src="/icons/gmeet.jpg" alt="Google Meet" width={20} height={20} className="w-5 h-5" /> },
+      { name: "Gmail", slug: "gmail", icon: <Image src="/icons/gmail.jpg" alt="Gmail" width={20} height={20} className="w-5 h-5" /> }
     ] 
   },
   { 
     name: "IT Stack", 
     icon: <Code size={20} />, 
     tools: [
-      { name: "HTML", slug: "html5", icon: <img src="/icons/html.jpg" alt="HTML5" className="w-5 h-5" /> },
-      { name: "CSS3", slug: "css3", icon: <img src="/icons/css3.jpg" alt="CSS3" className="w-5 h-5" /> },
-      { name: "Next.js", slug: "nextdotjs", icon: <img src="/icons/nextjs.jpg" className="w-5 h-5" /> },
-      { name: "SQL", slug: "mysql", icon: <img src="/icons/sql.jpg" alt="SQL" className="w-5 h-5" /> },
-      { name: "GitHub", slug: "github", icon: <img src="/icons/github.jpg" alt="GitHub" className="w-5 h-5" /> }
+      { name: "HTML", slug: "html5", icon: <Image src="/icons/html.jpg" alt="HTML5" width={20} height={20} className="w-5 h-5" /> },
+      { name: "CSS3", slug: "css3", icon: <Image src="/icons/css3.jpg" alt="CSS3" width={20} height={20} className="w-5 h-5" /> },
+      { name: "Next.js", slug: "nextdotjs", icon: <Image src="/icons/nextjs.jpg" alt="Next.js" width={20} height={20} className="w-5 h-5" /> },
+      { name: "SQL", slug: "mysql", icon: <Image src="/icons/sql.jpg" alt="SQL" width={20} height={20} className="w-5 h-5" /> },
+      { name: "GitHub", slug: "github", icon: <Image src="/icons/github.jpg" alt="GitHub" width={20} height={20} className="w-5 h-5" /> }
     ] 
   }
 ];
@@ -186,7 +187,7 @@ function LogoSection() {
   }`}
 >
   {/* Container to push items to the far edges with padding */}
-  <div className="max-w-[1600px] mx-auto px-8 md:px-12 flex justify-between items-center">
+  <div className="max-w-7xl mx-auto px-8 md:px-12 flex justify-between items-center">
     
     {/* Upper Left: Logo */}
     <div className="flex items-center">
@@ -200,26 +201,26 @@ function LogoSection() {
     </div>
 
     {/* Upper Right: Links */}
-    <div className="hidden md:flex items-center gap-12 text-[11px] font-sans font-medium uppercase tracking-[0.25em] text-black">
+    <div className="hidden md:flex items-center gap-12 text-[11px] font-sans font-medium uppercase tracking-[0.25em] text-black ml-auto">
       <a href="#about" className="hover:text-blush transition-colors relative group">
         About
-        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blush transition-all group-hover:w-full"></span>
+        <span className="absolute -bottom-1 left-0 w-0 h-px bg-blush transition-all group-hover:w-full"></span>
       </a>
       <a href="#work" className="hover:text-blush transition-colors relative group">
         Work
-        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blush transition-all group-hover:w-full"></span>
+        <span className="absolute -bottom-1 left-0 w-0 h-px bg-blush transition-all group-hover:w-full"></span>
       </a>
       <a href="#services" className="hover:text-blush transition-colors relative group">
         Services
-        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blush transition-all group-hover:w-full"></span>
+        <span className="absolute -bottom-1 left-0 w-0 h-px bg-blush transition-all group-hover:w-full"></span>
       </a>
       <a href="#education" className="hover:text-blush transition-colors relative group">
         Education
-        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blush transition-all group-hover:w-full"></span>
+        <span className="absolute -bottom-1 left-0 w-0 h-px bg-blush transition-all group-hover:w-full"></span>
       </a>
        <a href="#contact" className="hover:text-blush transition-colors relative group">
         Contact
-        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blush transition-all group-hover:w-full"></span>
+        <span className="absolute -bottom-1 left-0 w-0 h-px bg-blush transition-all group-hover:w-full"></span>
       </a>
     
     </div>
@@ -235,7 +236,7 @@ function LogoSection() {
       animate={{ opacity: 1, y: 0 }}
       className="text-sm tracking-[0.4em] uppercase text-gray-500 font-bold"
     >
-      Hi, I'm
+      Hi, I&apos;m
     </motion.p>
     
     <h1 className="text-7xl md:text-8xl xl:text-9xl font-black uppercase tracking-tighter leading-none text-black">
@@ -245,14 +246,14 @@ function LogoSection() {
     <div className="h-16 md:h-20 flex items-center justify-center">
       <AnimatePresence mode="wait">
         <motion.h2
-          key={titles[titleIndex]}
+          key={TITLES[titleIndex]}
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -20, opacity: 0 }}
           transition={{ duration: 0.5 }}
           className="text-2xl md:text-4xl font-light tracking-[0.2em] text-gray-400 uppercase"
         >
-          {titles[titleIndex]}
+          {TITLES[titleIndex]}
         </motion.h2>
       </AnimatePresence>
     </div>
@@ -289,7 +290,7 @@ function LogoSection() {
         h-full 
         rounded-full 
         overflow-hidden 
-        border-[12px] 
+        border-12
         border-white 
         shadow-[0_20px_50px_rgba(0,0,0,0.1)]
       ">
@@ -377,7 +378,7 @@ function LogoSection() {
 
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {toolCategories.map((cat, i) => (
-        <div key={i} className="bg-cream p-8 rounded-[32px] border border-black/5 hover:border-blush transition-all flex flex-col">
+        <div key={i} className="bg-cream p-8 rounded-4xl border border-black/5 hover:border-blush transition-all flex flex-col">
           <div className="bg-black text-blush w-10 h-10 rounded-2xl flex items-center justify-center mb-6">
             {cat.icon}
           </div>
@@ -397,9 +398,11 @@ function LogoSection() {
           t.icon
         ) : (
           /* This renders the SimpleIcons only if no local icon is provided */
-          <img 
+          <Image 
             src={`https://cdn.simpleicons.org/${t.slug}`} 
             alt={t.name}
+            width={24}
+            height={24}
             className="w-6 h-6 transition-transform duration-300 group-hover:scale-110 object-contain"
           />
         )}
@@ -540,7 +543,7 @@ function LogoSection() {
       <section id="contact" className="py-24 px-6 max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h3 className="text-5xl font-serif uppercase tracking-tighter mb-4">Get In Touch</h3>
-          <p className="text-gray-500 uppercase tracking-widest text-xs font-sans">Let's build something efficient together</p>
+          <p className="text-gray-500 uppercase tracking-widest text-xs font-sans">Let&apos;s build something efficient together</p>
         </div>
 
         {/* 1. Add the Action URL */}
@@ -577,7 +580,7 @@ function LogoSection() {
 
       <footer className="py-12 border-t border-black/5 text-center">
         <p className="text-[10px] font-bold uppercase tracking-[0.5em] opacity-30">
-          © {new Date().getFullYear()} — Amari's Portfolio
+          © {new Date().getFullYear()} — Amari&apos;s Portfolio
         </p>
       </footer>
     </main>
